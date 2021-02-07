@@ -10,7 +10,7 @@ function Icon({
   image,
   imageSize = size,
   name,
-  onPress,
+  onPress = null,
   size = 40,
   style,
   text,

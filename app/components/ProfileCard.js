@@ -1,11 +1,10 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import colors from "../config/colors";
 import ListItem from "../components/ListItem";
 import SingleDetailItem from "./SingleDetailItem";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 function ProfileCard({ data, style }) {
   return (

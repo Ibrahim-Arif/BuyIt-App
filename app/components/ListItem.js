@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TouchableHighlight,
+} from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import colors from "../config/colors";
@@ -15,12 +21,12 @@ function ListItem({
   IconComponent,
   RightComponent,
   renderRightActions,
-  onPress,
+  onPress = null,
   style,
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
+      <TouchableHighlight onPress={onPress} underlayColor={colors.lightgrey}>
         <View style={[styles.container, style]}>
           {image && (
             <Image
@@ -60,7 +66,7 @@ function ListItem({
           </View>
           {RightComponent}
         </View>
-      </TouchableOpacity>
+      </TouchableHighlight>
     </Swipeable>
   );
 }

@@ -83,7 +83,7 @@ const menuList = [
 
 const headerComponent = () => {
   return (
-    <View style={{ marginVertical: 20 }}>
+    <View style={{ marginVertical: 20, opacity: 0.7 }}>
       <FlatList
         data={iconList}
         keyExtractor={(item) => item.name.toString()}
