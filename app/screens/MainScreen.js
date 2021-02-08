@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { Dimensions, FlatList, StyleSheet, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 import DiamondButton from "../components/DiamondButton";
 import Heading from "../components/Heading";
 import ListItemCard from "../components/ListItemCard";
-import MyText from "../components/MyText";
+import ListItemCardDetail from "../components/ListItemCardDetail";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
 
@@ -16,7 +17,6 @@ const menuIcons = [
   { iconName: "file-cabinet" },
   { iconName: "chair-rolling" },
 ];
-
 const iconProps = {
   selected: {
     backgroundColor: colors.primary,
@@ -31,7 +31,6 @@ const iconProps = {
     iconColor: "#969baa",
   },
 };
-
 const itemList = [
   {
     id: 1,
@@ -76,67 +75,114 @@ const itemList = [
     price: 500,
   },
 ];
+const popularItemList = [
+  {
+    id: 1,
+    image: require("../assets/user.jpg"),
+    title: "Landscape",
+    description: "Matter made",
+    price: 650,
+  },
+  {
+    id: 2,
+    image: require("../assets/Elizabeth.jpg"),
+    title: "Table",
+    description: "Made in China",
+    price: 1000,
+  },
+  {
+    id: 3,
+    image: require("../assets/Alycia.jpg"),
+    title: "Alycia",
+    description: "model type",
+    price: 3500,
+  },
+];
 
 function MainScreen({ title }) {
   const [selectedIcon, setSelectedIcon] = useState(menuIcons[0].iconName);
 
   return (
     <Screen style={styles.container}>
-      <Heading title={title} titleSize={34} style={styles.topText} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Heading title={title} titleSize={34} style={styles.heading} />
 
-      <View style={styles.flatlist}>
-        <FlatList
-          data={menuIcons}
-          keyExtractor={(item) => item.iconName}
-          renderItem={({ item }) => (
-            <DiamondButton
-              iconName={item.iconName}
-              onPress={() => setSelectedIcon(item.iconName)}
-              props={
-                selectedIcon === item.iconName
-                  ? iconProps["selected"]
-                  : iconProps["disselected"]
-              }
-            />
-          )}
-          horizontal
-          showsHorizontalScrollIndicator={false}
+        <View>
+          <FlatList
+            data={menuIcons}
+            keyExtractor={(item) => item.iconName}
+            renderItem={({ item }) => (
+              <DiamondButton
+                iconName={item.iconName}
+                onPress={() => setSelectedIcon(item.iconName)}
+                props={
+                  selectedIcon === item.iconName
+                    ? iconProps["selected"]
+                    : iconProps["disselected"]
+                }
+              />
+            )}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+        <Heading
+          title="Model"
+          description="Good quality items"
+          style={styles.heading}
         />
-      </View>
-      <Heading title="Model" description="Good quality items" />
+        <View style={styles.itemList}>
+          <FlatList
+            data={itemList}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <ListItemCard
+                title={item.title}
+                description={item.description}
+                image={item.image}
+                price={item.price}
+                style={{ marginRight: 30 }}
+              />
+            )}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            ListHeaderComponent={<View style={{ marginLeft: 15 }} />}
+            ListFooterComponent={<View style={{ marginRight: 15 }} />}
+          />
+        </View>
 
-      <View style={{ height: "50%", top: 20 }}>
+        <Heading
+          title="Popular"
+          description="In recent month"
+          style={styles.heading}
+        />
+
         <FlatList
-          data={itemList}
+          data={popularItemList}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <ListItemCard
+            <ListItemCardDetail
               title={item.title}
               description={item.description}
-              image={item.image}
               price={item.price}
-              style={{ marginRight: 30 }}
+              image={item.image}
+              style={{ marginBottom: 15, elevation: 4 }}
             />
           )}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          ListHeaderComponent={<View style={{ marginLeft: 15 }} />}
-          ListFooterComponent={<View style={{ marginRight: 15 }} />}
+          style={{ marginHorizontal: 10 }}
         />
-      </View>
+      </ScrollView>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {},
-  topText: {
-    top: 20,
-    marginBottom: "7%",
+  itemList: {
+    height: Dimensions.get("screen").height * 0.4,
   },
-  flatlist: {
-    paddingHorizontal: 10,
-    marginBottom: "3%",
+  heading: {
+    marginVertical: 10,
   },
 });
 export default MainScreen;

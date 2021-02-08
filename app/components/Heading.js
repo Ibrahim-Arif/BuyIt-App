@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     width: 6,
     borderRadius: 3,
     marginRight: 5,
-    marginLeft: 10,
+    marginLeft: 15,
   },
   description: {
     fontSize: 18,
