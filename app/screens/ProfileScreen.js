@@ -3,9 +3,7 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { Entypo, AntDesign, Ionicons } from "@expo/vector-icons";
 
 import Icon from "../components/Icon";
-import MyText from "../components/MyText";
 import ProfileCard from "../components/ProfileCard";
-import Screen from "../components/Screen";
 import colors from "../config/colors";
 import ListItem from "../components/ListItem";
 
@@ -81,7 +79,7 @@ const menuList = [
   },
 ];
 
-const headerComponent = () => {
+const headerComponent = ({}) => {
   return (
     <View style={{ marginVertical: 20, opacity: 0.7 }}>
       <FlatList
@@ -105,11 +103,10 @@ const headerComponent = () => {
 
 function ProfileScreen({}) {
   return (
-    <Screen style={styles.container}>
-      <MyText style={styles.topText}>Center</MyText>
+    <View style={styles.container}>
       <ProfileCard
         data={{
-          title: "ibrahim arif",
+          title: "Ibrahim Arif",
           description: "A trendsetter",
           image: require("../assets/user.jpg"),
           collect: 50,
@@ -148,7 +145,7 @@ function ProfileScreen({}) {
           ListHeaderComponent={headerComponent}
         />
       </View>
-    </Screen>
+    </View>
   );
 }
 
@@ -156,6 +153,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 10,
+    marginTop: 20,
   },
   topText: {
     fontSize: 34,

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 
 import ListItem from "./ListItem";
 import Icon from "./Icon";
@@ -14,7 +14,11 @@ function ListItemCardDetail({
   style,
 }) {
   return (
-    <View style={[styles.container, style]}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.container, style]}
+      activeOpacity={0.5}
+    >
       {image && (
         <Image source={image} style={styles.image} resizeMode="cover" />
       )}
@@ -35,11 +39,10 @@ function ListItemCardDetail({
             name="arrow-right"
             color={colors.white}
             style={styles.icon}
-            onPress={onPress}
           />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
   icon: {
     borderRadius: 13,
     bottom: 20,
-    left: 15,
+    left: 10,
   },
   priceIconContainer: {
     marginLeft: 10,

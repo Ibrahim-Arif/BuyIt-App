@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { Dimensions, FlatList, StyleSheet, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import {
+  Dimensions,
+  FlatList,
+  StyleSheet,
+  View,
+  LogBox,
+  ScrollView,
+} from "react-native";
 
 import DiamondButton from "../components/DiamondButton";
 import Heading from "../components/Heading";
 import ListItemCard from "../components/ListItemCard";
 import ListItemCardDetail from "../components/ListItemCardDetail";
-import Screen from "../components/Screen";
+import Icon from "../components/Icon";
 import colors from "../config/colors";
 
 const menuIcons = [
@@ -34,42 +40,28 @@ const iconProps = {
 const itemList = [
   {
     id: 1,
-    image: require("../assets/user.jpg"),
+    image: require("../assets/1.webp"),
     title: "Landscape",
     description: "Matter made",
     price: 650,
   },
   {
     id: 2,
-    image: require("../assets/Elizabeth.jpg"),
+    image: require("../assets/2.jpg"),
     title: "Table",
     description: "Made in China",
     price: 1000,
   },
   {
     id: 3,
-    image: require("../assets/Alycia.jpg"),
+    image: require("../assets/3.jpg"),
     title: "Alycia",
     description: "model type",
     price: 3500,
   },
   {
     id: 4,
-    image: require("../assets/defaultUser.jpg"),
-    title: "default",
-    description: "user",
-    price: 500,
-  },
-  {
-    id: 5,
-    image: require("../assets/defaultUser.jpg"),
-    title: "default",
-    description: "user",
-    price: 500,
-  },
-  {
-    id: 6,
-    image: require("../assets/defaultUser.jpg"),
+    image: require("../assets/4.jpg"),
     title: "default",
     description: "user",
     price: 500,
@@ -78,36 +70,28 @@ const itemList = [
 const popularItemList = [
   {
     id: 1,
-    image: require("../assets/user.jpg"),
+    image: require("../assets/1.webp"),
     title: "Landscape",
     description: "Matter made",
     price: 650,
   },
   {
     id: 2,
-    image: require("../assets/Elizabeth.jpg"),
+    image: require("../assets/2.jpg"),
     title: "Table",
     description: "Made in China",
     price: 1000,
   },
-  {
-    id: 3,
-    image: require("../assets/Alycia.jpg"),
-    title: "Alycia",
-    description: "model type",
-    price: 3500,
-  },
 ];
 
-function MainScreen({ title }) {
+function MainScreen({ navigation }) {
   const [selectedIcon, setSelectedIcon] = useState(menuIcons[0].iconName);
+  LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
 
   return (
-    <Screen style={styles.container}>
+    <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Heading title={title} titleSize={34} style={styles.heading} />
-
-        <View>
+        <View style={styles.topContainer}>
           <FlatList
             data={menuIcons}
             keyExtractor={(item) => item.iconName}
@@ -125,12 +109,21 @@ function MainScreen({ title }) {
             horizontal
             showsHorizontalScrollIndicator={false}
           />
+
+          <Icon
+            image={require("../assets/user.jpg")}
+            size={50}
+            style={{ marginLeft: 10 }}
+            onPress={() => navigation.navigate("Profile")}
+          />
         </View>
+
         <Heading
           title="Model"
           description="Good quality items"
           style={styles.heading}
         />
+
         <View style={styles.itemList}>
           <FlatList
             data={itemList}
@@ -166,23 +159,32 @@ function MainScreen({ title }) {
               description={item.description}
               price={item.price}
               image={item.image}
+              onPress={() => console.log("popular item pressed")}
               style={{ marginBottom: 15, elevation: 4 }}
             />
           )}
           style={{ marginHorizontal: 10 }}
         />
       </ScrollView>
-    </Screen>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginTop: 5,
+  },
   itemList: {
-    height: Dimensions.get("screen").height * 0.4,
+    height: Dimensions.get("screen").height * 0.45,
   },
   heading: {
     marginVertical: 10,
+  },
+  topContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingRight: 20,
   },
 });
 export default MainScreen;

@@ -1,21 +1,20 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
 import MainScreen from "./app/screens/MainScreen";
 import ProfileScreen from "./app/screens/ProfileScreen";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      {/* <ProfileScreen /> */}
-      <MainScreen title="Furniture" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
+const navigator = createStackNavigator(
+  {
+    Home: MainScreen,
+    Profile: ProfileScreen,
   },
-});
+  {
+    initialRouteName: "Home",
+    defaultNavigatorOptions: {
+      title: "App",
+    },
+  }
+);
+
+export default createAppContainer(navigator);

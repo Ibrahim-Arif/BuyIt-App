@@ -17,8 +17,10 @@ function ListItemCard({ image, title, description, price, onPress, style }) {
           title={title}
           description={description}
           price={price}
+          onPress={() => console.log("card pressed")}
           style={{
             height: "30%",
+            width: "85%",
             bottom: 30,
           }}
         />
