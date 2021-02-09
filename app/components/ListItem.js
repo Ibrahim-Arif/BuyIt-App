@@ -24,46 +24,45 @@ function ListItem({
         onPress={onPress}
         underlayColor={colors.lightgrey}
         activeOpacity={0.5}
+        style={[styles.container, style]}
       >
-        <View style={[styles.container, style]}>
-          {image && (
-            <Image
-              style={[
-                {
-                  height: imageSize,
-                  width: imageSize,
-                  borderRadius: imageSize / 2,
-                },
-                imageStyle,
-              ]}
-              source={image}
-            />
-          )}
-          {IconComponent}
+        {image && (
+          <Image
+            style={[
+              {
+                height: imageSize,
+                width: imageSize,
+                borderRadius: imageSize / 2,
+              },
+              imageStyle,
+            ]}
+            source={image}
+          />
+        )}
+        {IconComponent}
 
-          <View style={styles.containerText}>
+        <View style={styles.containerText}>
+          <Text
+            numberOfLines={1}
+            style={[styles.text, titleStyle, { textTransform: "capitalize" }]}
+          >
+            {title}
+          </Text>
+
+          {description && (
             <Text
               numberOfLines={1}
-              style={[styles.text, titleStyle, { textTransform: "capitalize" }]}
+              style={[
+                styles.text,
+                { color: colors.darkgrey, fontSize: 16, marginTop: 3 },
+                descriptionStyle,
+              ]}
             >
-              {title}
+              {description}
             </Text>
-
-            {description && (
-              <Text
-                numberOfLines={1}
-                style={[
-                  styles.text,
-                  { color: colors.darkgrey, fontSize: 16, marginTop: 3 },
-                  descriptionStyle,
-                ]}
-              >
-                {description}
-              </Text>
-            )}
-          </View>
-          {RightComponent}
+          )}
         </View>
+        {RightComponent}
       </TouchableOpacity>
     </Swipeable>
   );
