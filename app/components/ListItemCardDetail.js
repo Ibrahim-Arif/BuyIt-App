@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 
-import ListItem from "./ListItem";
-import Icon from "./Icon";
 import colors from "../config/colors";
+import ArrowIcon from "./ArrowIcon";
 
 function ListItemCardDetail({
   title,
@@ -24,22 +23,23 @@ function ListItemCardDetail({
       )}
 
       <View style={styles.detail}>
-        <ListItem
-          title={title}
-          description={description}
-          style={{ padding: 0 }}
-        />
+        <View style={{ paddingLeft: 10 }}>
+          <Text style={styles.text}>{title}</Text>
+          <Text
+            style={[
+              styles.text,
+              { color: colors.darkgrey, marginTop: 3, fontSize: 16 },
+            ]}
+          >
+            {description}
+          </Text>
+        </View>
         <View style={styles.priceIconContainer}>
           <Text style={styles.price}>
             {price}
             <Text style={{ fontSize: 16 }}>{"  USD"}</Text>
           </Text>
-          <Icon
-            backgroundColor={colors.primary}
-            name="arrow-right"
-            color={colors.white}
-            style={styles.icon}
-          />
+          <ArrowIcon direction="right" style={styles.icon} />
         </View>
       </View>
     </TouchableOpacity>
@@ -48,12 +48,11 @@ function ListItemCardDetail({
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 10,
+    padding: 10,
     borderRadius: 30,
     backgroundColor: colors.white,
     width: "95%",
-    elevation: 7,
-    paddingVertical: 10,
+    elevation: 5,
     flexDirection: "row",
     alignItems: "center",
   },
@@ -67,15 +66,18 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   icon: {
-    borderRadius: 13,
     bottom: 20,
-    left: 10,
+    left: 20,
   },
   priceIconContainer: {
     marginLeft: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 25,
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: "bold",
   },
   image: {
     borderRadius: 35,

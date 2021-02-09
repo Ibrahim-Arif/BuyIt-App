@@ -6,7 +6,8 @@ import MyText from "./MyText";
 function SingleDetailItem({
   first,
   second,
-  color = null,
+  SecondComponent,
+  color,
   firstStyle,
   secondStyle,
   style,
@@ -14,9 +15,12 @@ function SingleDetailItem({
   return (
     <View style={[styles.container, { backgroundColor: color }, style]}>
       <MyText style={[styles.text, firstStyle]}>{first}</MyText>
-      <MyText style={[styles.text, { marginTop: 5 }, secondStyle]}>
-        {second}
-      </MyText>
+      {!SecondComponent && (
+        <MyText style={[styles.text, { marginTop: 5 }, secondStyle]}>
+          {second}
+        </MyText>
+      )}
+      {SecondComponent}
     </View>
   );
 }
@@ -24,6 +28,8 @@ function SingleDetailItem({
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+    justifyContent: "space-around",
+    borderRadius: 10,
   },
   text: {
     fontSize: 18,

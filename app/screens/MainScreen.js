@@ -13,7 +13,6 @@ import Heading from "../components/Heading";
 import ListItemCard from "../components/ListItemCard";
 import ListItemCardDetail from "../components/ListItemCardDetail";
 import Icon from "../components/Icon";
-import colors from "../config/colors";
 
 const menuIcons = [
   { iconName: "coach-lamp" },
@@ -23,20 +22,6 @@ const menuIcons = [
   { iconName: "file-cabinet" },
   { iconName: "chair-rolling" },
 ];
-const iconProps = {
-  selected: {
-    backgroundColor: colors.primary,
-    size: 60,
-    diamondColor: colors.light,
-    iconColor: colors.white,
-  },
-  disselected: {
-    backgroundColor: colors.lightgrey,
-    size: 50,
-    diamondColor: "#BFCBD9",
-    iconColor: "#969baa",
-  },
-};
 const itemList = [
   {
     id: 1,
@@ -99,11 +84,8 @@ function MainScreen({ navigation }) {
               <DiamondButton
                 iconName={item.iconName}
                 onPress={() => setSelectedIcon(item.iconName)}
-                props={
-                  selectedIcon === item.iconName
-                    ? iconProps["selected"]
-                    : iconProps["disselected"]
-                }
+                isActive={selectedIcon === item.iconName}
+                insideDiamond
               />
             )}
             horizontal
@@ -134,6 +116,7 @@ function MainScreen({ navigation }) {
                 description={item.description}
                 image={item.image}
                 price={item.price}
+                onPress={() => navigation.navigate("Product")}
                 style={{ marginRight: 30 }}
               />
             )}
@@ -159,8 +142,8 @@ function MainScreen({ navigation }) {
               description={item.description}
               price={item.price}
               image={item.image}
-              onPress={() => console.log("popular item pressed")}
-              style={{ marginBottom: 15, elevation: 4 }}
+              onPress={() => navigation.navigate("Product")}
+              style={{ marginBottom: 15, elevation: 3 }}
             />
           )}
           style={{ marginHorizontal: 10 }}
